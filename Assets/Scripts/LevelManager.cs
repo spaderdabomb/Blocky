@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +9,12 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
         Instance = this;
     }
 
@@ -19,9 +23,9 @@ public class LevelManager : MonoBehaviour
         
     }
 
-    public void InitializeLevel()
+    public void InitializeLevel(int _levelNum)
     {
-        levelNum = 1;
+        levelNum = _levelNum;
         SceneManager.LoadScene("GameScene");
     }
 

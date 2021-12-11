@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Hook
+  - Boundary
+  - Star
   layers:
   - Default
   - TransparentFX
@@ -11,10 +14,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Ground
+  - Ceiling
+  - Star
   - 
   - 
   - 
@@ -40,4 +43,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Objects
+    uniqueID: 2835616113
+    locked: 0
+  - name: Enemies
+    uniqueID: 445229001
+    locked: 0
+  - name: Player
+    uniqueID: 2280866537
+    locked: 0
+  - name: UI
+    uniqueID: 1842465427
     locked: 0

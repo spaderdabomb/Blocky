@@ -4,69 +4,62 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] float speed;
-    [SerializeField] float jumpSpeed;
+    [SerializeField] GameSceneController gameSceneController;
 
-    bool isColliding;
-    bool isJumping;
+    public PlayerState currentState;
+
+    public CharacterController2D controller;
+    public float runSpeed = 20f;
+
+    float horizontalMove = 0f;
+    bool jump = false;
 
     void Start()
     {
-        if (speed == 0f) { speed = GlobalData.defaultPlayerSpeed; }
-        if (jumpSpeed == 0f) { speed = GlobalData.defaultPlayerJumpSpeed; }
-
-        isColliding = false;
-        isJumping = false;
+        currentState = new PlayerState();
+        currentState = PlayerState.Idle;
     }
 
     // Update is called once per frame
     void Update()
     {
-        MoveX();
-        Jump();
-    }
-
-    void MoveX()
-    {
-        float horizontal = Input.GetAxis("Horizontal") * speed;
-        gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(horizontal, 0));
-    }
-
-    void Jump()
-    {
-        if (Mathf.Abs(gameObject.GetComponent<Rigidbody2D>().velocity.y) > 0f)
+        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        if (Input.GetButtonDown("Jump"))
         {
-            isJumping = true;
-            print("isjumping is true");
+            jump = true;
+            currentState = PlayerState.Jumping;
+        }
+
+        
+    }
+
+    private void FixedUpdate()
+    {
+        if (currentState == PlayerState.Grappling)
+        {
+
         }
         else
         {
-            isJumping = false;
+            controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
         }
+        jump = false;
+    }
 
-        if (!isJumping)
+    public enum PlayerState 
+    {
+        Idle,
+        Walking,
+        Jumping,
+        Grappling
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Star"))
         {
-            print("initiating jump");
-            float vertical = Input.GetAxis("Vertical") * jumpSpeed;
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, vertical));
-            isJumping = true;
+            GameObject.Destroy(collision.gameObject);
+            gameSceneController.starCoinsCollected += 1;
         }
     }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        isColliding = true;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        isColliding = true;
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        isColliding = false;
-    }
-
-
 }
