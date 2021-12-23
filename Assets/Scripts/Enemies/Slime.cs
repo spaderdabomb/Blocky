@@ -17,4 +17,9 @@ public class Slime : Enemy
         moveSpeed = 2;
     }
 
+/*    protected override void Attack()
+    {
+
+    }*/
+
 }

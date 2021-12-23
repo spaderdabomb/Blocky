@@ -133,6 +133,10 @@ public class Grapple : MonoBehaviour
             BeginGrapple();
             grappleEndPoint = grappleArrow.transform.position;
         }
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            collision.gameObject.GetComponent<Enemy>().Damage(player.GetComponent<Player>().grappleDamage);
+        }
     }
 
     void BeginGrapple()

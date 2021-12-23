@@ -10,9 +10,11 @@ public class Player : MonoBehaviour
 
     public CharacterController2D controller;
     public float runSpeed = 20f;
+    public float grappleDamage = 1f;
+    public float bounceOffEnemyForce = 1000f;
 
     float horizontalMove = 0f;
-    bool jump = false;
+    public bool jump = false;
 
     void Start()
     {
@@ -30,7 +32,15 @@ public class Player : MonoBehaviour
             currentState = PlayerState.Jumping;
         }
 
-        
+        UpdateState();
+    }
+
+    void UpdateState()
+    {
+        if (currentState == PlayerState.Jumping)
+        {
+
+        }
     }
 
     private void FixedUpdate()
@@ -56,10 +66,17 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // TODO: Only check one collider
         if (collision.CompareTag("Star"))
         {
             GameObject.Destroy(collision.gameObject);
             gameSceneController.starCoinsCollected += 1;
         }
+
+        if (collision.CompareTag("DeathTiles"))
+        {
+
+        }
+
     }
 }

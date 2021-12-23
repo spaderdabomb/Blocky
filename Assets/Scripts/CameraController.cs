@@ -15,18 +15,18 @@ public class CameraController : MonoBehaviour
     }
     public void changeCameras(int cameraIndex)
     {
-        print("changing cameras");
         for (int i = 0; i < virtualCameras.Count; i++)
         {
             if (i == cameraIndex)
             {
-                virtualCameras[cameraIndex].SetActive(true);
+
             }
             else
             {
                 virtualCameras[cameraIndex].SetActive(false);
-
             }
         }
+
+        virtualCameras[cameraIndex].SetActive(true);
     }
 }

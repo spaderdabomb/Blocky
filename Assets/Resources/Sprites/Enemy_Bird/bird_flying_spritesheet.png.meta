@@ -1,19 +1,25 @@
 fileFormatVersion: 2
-guid: 2364a051ef9c9c14d87b25aaab81f68a
+guid: e1031204e729771499a9f7d9f5b3939f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3296362929794034626
-    second: shoot_0
+      213: -5049303377151337423
+    second: bird_flying_spritesheet_0
   - first:
-      213: 7554319563551622173
-    second: shoot_1
+      213: -5578899732137413350
+    second: bird_flying_spritesheet_1
   - first:
-      213: 629617002330759104
-    second: shoot_2
+      213: 4318710998444678193
+    second: bird_flying_spritesheet_2
   - first:
-      213: -5054808157803969943
-    second: shoot_3
+      213: 974617936086297155
+    second: bird_flying_spritesheet_3
+  - first:
+      213: 909753823286506589
+    second: bird_flying_spritesheet_4
+  - first:
+      213: -2179697465881106660
+    second: bird_flying_spritesheet_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -151,85 +157,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: shoot_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 78
-        width: 52
-        height: 26
-      alignment: 1
-      pivot: {x: 0, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e345cd65167f042d0800000000000000
-      internalID: -3296362929794034626
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shoot_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 52
-        width: 52
-        height: 26
-      alignment: 1
-      pivot: {x: 0, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d1447495e9556d860800000000000000
-      internalID: 7554319563551622173
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shoot_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 26
-        width: 52
-        height: 26
-      alignment: 1
-      pivot: {x: 0, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0cf9878e359dcb800800000000000000
-      internalID: 629617002330759104
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shoot_3
+      name: bird_flying_spritesheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 52
-        height: 26
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        width: 288
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 962095213c6b9d9b0800000000000000
-      internalID: -5054808157803969943
+      spriteID: 13cd6b1b4554de9b0800000000000000
+      internalID: -5049303377151337423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bird_flying_spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 288
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a157d6c7044c392b0800000000000000
+      internalID: -5578899732137413350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bird_flying_spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 288
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13c1ed585c42feb30800000000000000
+      internalID: 4318710998444678193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bird_flying_spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 0
+        width: 288
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34ae52069d9868d00800000000000000
+      internalID: 974617936086297155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bird_flying_spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 288
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d54bb0e384810ac00800000000000000
+      internalID: 909753823286506589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bird_flying_spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 0
+        width: 288
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c17665c04b820c1e0800000000000000
+      internalID: -2179697465881106660
       vertices: []
       indices: 
       edges: []

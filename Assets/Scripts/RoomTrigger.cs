@@ -11,6 +11,8 @@ public class RoomTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            print("new camera");
+
             mainCamera.GetComponent<CameraController>().changeCameras(roomTriggerIndex);
         }
     }
