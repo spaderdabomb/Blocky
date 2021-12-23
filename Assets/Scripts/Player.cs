@@ -78,5 +78,10 @@ public class Player : MonoBehaviour
 
         }
 
+        if (collision.CompareTag("Powerup"))
+        {
+            GameObject.Destroy(collision.gameObject);
+        }
+
     }
 }
