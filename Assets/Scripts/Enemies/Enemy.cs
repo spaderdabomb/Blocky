@@ -156,7 +156,7 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (bounceCollider.IsTouching(collision.collider))
+        if (bounceCollider.IsTouching(collision.collider) && player.GetComponent<CircleCollider2D>().IsTouching(bounceCollider))
         {
             print(player.GetComponent<Player>().bounceOffEnemyForce);
             player.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, player.GetComponent<Player>().bounceOffEnemyForce));

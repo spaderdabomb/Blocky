@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
 
     public PlayerState currentState;
 
+    public BoxCollider2D playerBoxCollider2D;
+    public CircleCollider2D playerCircleCollider2D;
     public CharacterController2D controller;
     public float runSpeed = 20f;
     public float grappleDamage = 1f;
@@ -66,8 +68,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // TODO: Only check one collider
-        if (collision.CompareTag("Star"))
+        if (collision.CompareTag("Star") && playerCircleCollider2D.IsTouching(collision))
         {
             GameObject.Destroy(collision.gameObject);
             gameSceneController.starCoinsCollected += 1;
@@ -78,9 +79,10 @@ public class Player : MonoBehaviour
 
         }
 
-        if (collision.CompareTag("Powerup"))
+        if (collision.CompareTag("Powerup") && playerCircleCollider2D.IsTouching(collision))
         {
             GameObject.Destroy(collision.gameObject);
+            PowerupManager.Instance.NewPowerupPickedUp(PowerupManager.PowerupType.DoubleJump);
         }
 
     }
