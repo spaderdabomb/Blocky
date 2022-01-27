@@ -6,22 +6,28 @@ public class PowerupManager : MonoBehaviour
 {
     public static PowerupManager Instance;
 
-    public List<PowerupType> activePowerups;
-    public Dictionary<PowerupType, bool> powerupsCurrentlyAvailable;
+    public List<Powerup.PowerupType> activePowerups;
     public List<GameObject> powerupList;
+    public Dictionary<Powerup.PowerupType, bool> powerupsCurrentlyAvailable;
+    public Dictionary<Powerup.PowerupType, GameObject> powerupPrefabDict;
 
-    [SerializeField] GameObject powerupBluePrefab;
-    [SerializeField] GameObject powerupRedPrefab;
-    [SerializeField] GameObject powerupYellowPrefab;
-    [SerializeField] GameObject powerupGreenPrefab;
+    [SerializeField] GameObject powerupDoubleJumpPrefab;
+    [SerializeField] GameObject powerupFlyPrefab;
+    [SerializeField] GameObject powerupShieldPrefab;
+    [SerializeField] GameObject powerupRapidFirePrefab;
     [SerializeField] GameObject powerupHolder;
+
+    [SerializeField] GameObject shieldPrefab;
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject shield;
 
     List<float> powerupsDurationRemaining;
 
-    float powerupDuration = 5f;
+    float powerupDuration = 10f;
 
     private void Awake()
     {
+        // Initialize singleton
         if (Instance)
         {
             Destroy(gameObject);
@@ -29,63 +35,104 @@ public class PowerupManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
         Instance = this;
+
+        // Initialize self-dependent variables
+        activePowerups = new List<Powerup.PowerupType>();
+        powerupList = new List<GameObject>();
+        powerupsDurationRemaining = new List<float>();
+        powerupsCurrentlyAvailable = new Dictionary<Powerup.PowerupType, bool>()
+        {
+            { Powerup.PowerupType.DoubleJump, false },
+            { Powerup.PowerupType.Fly, false },
+            { Powerup.PowerupType.Shield, false },
+            { Powerup.PowerupType.RapidFire, false }
+        };
+        powerupPrefabDict = new Dictionary<Powerup.PowerupType, GameObject>()
+        {
+            { Powerup.PowerupType.DoubleJump, powerupDoubleJumpPrefab },
+            { Powerup.PowerupType.Fly, powerupFlyPrefab },
+            { Powerup.PowerupType.Shield, powerupShieldPrefab },
+            { Powerup.PowerupType.RapidFire, powerupRapidFirePrefab }
+        };
     }
 
     void Start()
     {
-        activePowerups = new List<PowerupType>();
-        powerupList = new List<GameObject>();
-        powerupsDurationRemaining = new List<float>();
-        powerupsCurrentlyAvailable = new Dictionary<PowerupType, bool>()
-        {
-            { PowerupType.DoubleJump, false }
-        };
+
     }
 
     void Update()
     {
-        
+        for (int i = 0; i < powerupsDurationRemaining.Count; i++)
+        {
+            // Update powerup parameters
+            powerupsDurationRemaining[i] -= Time.deltaTime;
+            Animator tempAnimator = powerupList[i].GetComponent<Animator>();
+            tempAnimator.SetFloat("timeRemaining", powerupsDurationRemaining[i]);
+
+            // Handle powerup ending
+            if (powerupsDurationRemaining[i] <= 0)
+            {
+                RemovePowerupAtIndex(i);
+            }
+        }
     }
 
     private void FixedUpdate()
     {
+
+    }
+
+    public void NewPowerupPickedUp(Powerup.PowerupType newPowerup)
+    {
+
+        if (!powerupsCurrentlyAvailable[newPowerup])
+        {
+            activePowerups.Add(newPowerup);
+            GameObject instantiatedPowerup = Instantiate<GameObject>(powerupPrefabDict[newPowerup], powerupHolder.transform);
+            Animator tempAnimator = instantiatedPowerup.GetComponent<Animator>();
+            tempAnimator.SetFloat("timeRemaining", powerupDuration);
+            powerupList.Add(instantiatedPowerup);
+            float tempDuration = powerupDuration;
+            powerupsDurationRemaining.Add(tempDuration);
+            powerupsCurrentlyAvailable[newPowerup] = true;
+
+            shield.SetActive(true);
+        }
+        else
+        {
+            int powerupIndex = activePowerups.IndexOf(newPowerup);
+            float tempDuration = powerupDuration;
+            powerupsDurationRemaining[powerupIndex] = tempDuration;
+        }
+    }
+
+    public void RemovePowerupAtIndex(int index)
+    {
+        if (activePowerups[index] == Powerup.PowerupType.Shield)
+        {
+            shield.SetActive(false);
+        }
+
+        GameObject tempPowerup = powerupHolder.transform.GetChild(index).gameObject;
+        Destroy(tempPowerup);
+        powerupList.RemoveAt(index);
+        activePowerups.RemoveAt(index);
+        powerupsDurationRemaining.RemoveAt(index);
+    }
+
+    public void ClearAllPowerups()
+    {
         for (int i = 0; i < powerupsDurationRemaining.Count; i++)
         {
-            powerupsDurationRemaining[i] -= Time.fixedDeltaTime;
-            if (powerupsDurationRemaining[i] <= 0)
-            {
-                GameObject tempPowerup = powerupHolder.transform.GetChild(i).gameObject;
-                Destroy(tempPowerup);
-                powerupList.RemoveAt(i);
-                powerupsDurationRemaining.RemoveAt(i);
-            }
+            RemovePowerupAtIndex(i);
         }
     }
 
-    public void NewPowerupPickedUp(PowerupType newPowerup)
+    public int GetIndexFromPowerup(Powerup.PowerupType powerupType)
     {
-        activePowerups.Add(newPowerup);
+        int powerupIndex = activePowerups.IndexOf(powerupType);
 
-        if (newPowerup == PowerupType.DoubleJump)
-        {
-            if (!powerupsCurrentlyAvailable[PowerupType.DoubleJump])
-            {
-                GameObject instantiatedPowerup = Instantiate<GameObject>(powerupBluePrefab, powerupHolder.transform);
-                powerupList.Add(instantiatedPowerup);
-                float tempDuration = powerupDuration;
-                powerupsDurationRemaining.Add(tempDuration);
-                powerupsCurrentlyAvailable[PowerupType.DoubleJump] = true;
-            }
-            else
-            {
-
-            }
-        }
+        return powerupIndex;
     }
-
-    public enum PowerupType
-    {
-        DoubleJump
-    }
-
 }

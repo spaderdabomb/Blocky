@@ -6,6 +6,7 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance;
 
     public int levelNum;
+    public int roomNum;
 
     private void Awake()
     {
@@ -23,10 +24,16 @@ public class LevelManager : MonoBehaviour
         
     }
 
-    public void InitializeLevel(int _levelNum)
+    public void InitLevel(int _levelNum, int _roomNum)
     {
         levelNum = _levelNum;
+        roomNum = _roomNum;
         SceneManager.LoadScene("GameScene");
+    }
+
+    public void InitRoom(int _roomNum)
+    {
+        roomNum = _roomNum;
     }
 
 

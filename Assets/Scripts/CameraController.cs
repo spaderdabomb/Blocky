@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] GameObject cameraHolder;
     List<GameObject> virtualCameras = new List<GameObject>();
-    private void Start()
+    private void Awake()
     {
         foreach (Transform gameObjectTransform in cameraHolder.transform)
         {

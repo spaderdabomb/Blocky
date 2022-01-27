@@ -15,7 +15,7 @@ public class LevelButton : MonoBehaviour
     void Start()
     {
         gameObject.GetComponentInChildren<Text>().text = buttonIndex.ToString();
-        gameObject.GetComponent<Button>().onClick.AddListener(delegate { LevelManager.Instance.InitializeLevel(buttonIndex); });
+        gameObject.GetComponent<Button>().onClick.AddListener(delegate { LevelManager.Instance.InitLevel(buttonIndex, 1); });
     }
 
     // Update is called once per frame

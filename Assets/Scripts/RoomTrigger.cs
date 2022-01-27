@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class RoomTrigger : MonoBehaviour
 {
+    [SerializeField] GameSceneController gameSceneController;
     [SerializeField] GameObject mainCamera;
     [SerializeField] int roomTriggerIndex;
+    [SerializeField] PowerupManager powerupManager;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            print("new camera");
-
-            mainCamera.GetComponent<CameraController>().changeCameras(roomTriggerIndex);
+            gameSceneController.NewRoomEntered(roomTriggerIndex);
         }
     }
 }
